@@ -2,10 +2,24 @@
 <html>
   <head>
     <title><%= title %></title>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+    <div class='gamesList'>
+        <% games.forEach(game => { %>
+      
+      <p>  
+      <%= game.name  %>
+      </p>
+      <% }) %>
+      </div>
+
+
+
+   
+
   </body>
 </html>
