@@ -3,6 +3,9 @@ const { Model, Sequelize, DataTypes } = require('sequelize');
 
 class Players extends Model { }
 
+const HighScores = require('./HighScores.js');
+const Games = require('./Games.js');
+
 const sequelize = new Sequelize('postgres://postgres:secretpassword@localhost:5432/highscore');
 
 
@@ -33,6 +36,7 @@ const sequelize = new Sequelize('postgres://postgres:secretpassword@localhost:54
     }
 );
 
+Players.belongsToMany(Games, { through: HighScores });
 
 module.exports = Players;
 

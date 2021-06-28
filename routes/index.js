@@ -8,7 +8,7 @@ var router = express.Router();
 /* GET home page. */
   router.get('/', async function (req, res) {
   
-    const games = await Games.findAll();
+    const games = await Games.findAll({ include: HighScores });
 
     // const client = new Client(req.app.locals.client);
 
