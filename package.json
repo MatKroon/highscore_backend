@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon  ./bin/www"
+ 
+    "start": "nodemon -r dotenv/config index.js dotenv_config_path=.env"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -17,3 +18,5 @@
     "sequelize": "^6.6.2"
   }
 }
+
+
