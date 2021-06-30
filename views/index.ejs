@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
+
+   
+   
     <title><%= title %></title>
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css' />
@@ -9,22 +12,27 @@
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
     <div class='gamesList'>
-        <% games.forEach(game => { %>
+        <% games.forEach(game => { 
+          
+          
+          %>
+
+          <% console.log(game.HighScores) %>
       
     <div class="card mb-3" style="max-width: 540px;">
   <div class="row g-0">
     <div class="col-md-3">
-      <img src="..." class="img-fluid rounded-start" alt="...">
+      <img src="<%= game.imageurl %>" class="img-fluid rounded-start" alt="...">
     </div>
     <div class="col-md-6">
       <div class="card-body">
         <h5 class="card-title"> <%= game.name %></h5>
         <!-- <p class="card-text"><%= game.description %></p> -->
-        <p class="card-text"><small class="text-muted"> <%= game.date %>o</small></p>
+        <p class="card-text"><small class="text-muted"> <%= game.HighScores[0].date %></small></p>
       </div>
     </div>
      <div class="col-md-3">
- <h5 class="card-title"> <%= game.highscore %></h5>
+ <h5 class="card-title"> <%= game.HighScores[0].points %></h5>
      </div>
   </div>
 </div>

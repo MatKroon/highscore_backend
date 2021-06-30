@@ -15,7 +15,7 @@ HighScores.init({
         allowNull: false,
         primaryKey: true
     },
-    game_id: {
+    gameid: {
         type: DataTypes.NUMBER,
         allowNull: false,
         references: {
@@ -23,7 +23,7 @@ HighScores.init({
             key: 'id'
         }
     },
-    player_id: {
+    playerid: {
         type: DataTypes.NUMBER,
         allowNull: false,
         references: {
@@ -43,8 +43,7 @@ HighScores.init({
     {
         sequelize,
         tableName: 'highscores',
-        timestamps: false,
-        underscored: true
+        timestamps: false
     }
 );
 

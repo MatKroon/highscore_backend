@@ -1,25 +1,25 @@
-version: '3.1'
+version: "3.1"
 services:
-    pgadmin:
-        image: dpage/pgadmin4
-        environment:
-            PGADMIN_DEFAULT_EMAIL: postgres@test.com
-            PGADMIN_DEFAULT_PASSWORD: secretpassword
-            PGADMIN_CONFIG_SERVER_MODE: 'False'
-        ports: 
-            - 5050:5050
-        restart: unless-stopped
-    postgres:
-        container_name: postgres_container
-        image: postgres
-        environment: 
-            POSTGRES_USER: postgres
-            POSTGRES_PASSWORD: secretpassword
-        ports: 
-            - 5432:5432
-        volumes:
-            - inlamningBNdb:/var/lib/postgresql/data
-        restart: unless-stopped
-    
+  pgadmin:
+    image: thajeztah/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: postgres@test.com
+      PGADMIN_DEFAULT_PASSWORD: secretpassword
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+    ports:
+      - 5050:5050
+    restart: unless-stopped
+  postgres:
+    container_name: postgres_container
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secretpassword
+    ports:
+      - 5432:5432
+    volumes:
+      - inlamningBNdb:/var/lib/postgresql/data
+    restart: unless-stopped
+
 volumes:
-    inlamningBNdb:
+  inlamningBNdb:
