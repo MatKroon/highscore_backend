@@ -16,10 +16,11 @@ Players.belongsToMany(Games, { through: HighScores });
 router.get("/", async function (req, res) {
   // SELECT games.name AS game, imageurl, points, firstname, surname, date
   // FROM games
-  // LEFT JOIN highscores
+  // JOIN highscores
   //   ON games.id = highscores.game_id
-  // LEFT JOIN players
+  //  JOIN players
   //   ON highscores.player_id = players.id
+
   try {
     let games = await Games.findAll({ include: Players });
 
@@ -34,10 +35,10 @@ router.get("/", async function (req, res) {
     console.log(games);
 
     games = games.sort((a, b) => {
-      if (typeof b.Players != "undefined") {
+      if (typeof b.Players === "undefined") {
         return 0;
       }
-      if (typeof a.Players != "undefined") {
+      if (typeof a.Players === "undefined") {
         return 1;
       }
       return (

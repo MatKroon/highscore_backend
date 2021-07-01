@@ -1,51 +1,39 @@
 <!DOCTYPE html>
 <html>
-  <%- include('../includes/header.ejs'); %>
-  
   <body>
-    <div class='container '>
-   
-   <div class="row">
-    <div class="col-md-6">
-        <img class="view_img"  src="<%= gameScores[0].imageurl %>"></div>
+    <%- include('../includes/header.ejs'); %>
+    <div class="container">
+      <div class="row game_display_row">
+        <div class="col-md-6">
+          <img class="view_img" src="<%= gameScores[0].imageurl %>" />
+        </div>
         <div class="col-md-6">
           <h1><%= gameScores[0].game %></h1>
           <p><%= gameScores[0].description %></p>
+        </div>
       </div>
-   </div>
 
-     <h1 class="text-center">High Scores</h1>
-    <div class='playerList'>
-      <% gameScores.forEach(score => {   %>
+      <h1 class="text-center">High Scores</h1>
+      <div class="playerList">
+        <% gameScores.forEach(score => { %>
 
-     
-    
-  <div class="card mb-3" style="max-width: 100%;">
-    
-<div class="row g-0">
-     <div class="col-md-9">
-    <div class="card-body">
-      <h5 class="card-title"> <%= score.firstname %>  <%= score.surname %>, <%= score.date %> </h5>
-    
-      
+        <div class="card mb-3" style="max-width: 100%">
+          <div class="row g-0">
+            <div class="col-md-9">
+              <div class="card-body">
+                <h5 class="card-title">
+                  <%= score.firstname %> <%= score.surname %>, <%= score.date %>
+                </h5>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <h5 class="card-point"><%= score.points %></h5>
+            </div>
+          </div>
+        </div>
+
+        <% }) %>
+      </div>
     </div>
-  </div>
-   <div class="col-md-3">
-     <h5 class="card-point"> <%= score.points %></h5>
-   </div>
-</div>
-
-</div>
-
-
-
-    <% }) %>
-    </div>
-
-   
-    
-
-    </div>   
-
   </body>
 </html>

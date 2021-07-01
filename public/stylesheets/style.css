@@ -44,3 +44,7 @@ a:active {
 .text-center {
   text-align: center;
 }
+
+.game_display_row {
+  margin-bottom: 30px;
+}
