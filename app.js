@@ -8,6 +8,11 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var searchRouter = require('./routes/search');
 var gamesRouter = require('./routes/games');
+
+//admin
+var adminGamesRouter = require('./routes/admin/games');
+var adminPlayersRouter = require('./routes/admin/players');
+var adminHighscoresRouter = require('./routes/admin/highscores');
 // var usersRouter = require('./routes/users');
 
 var app = express();
@@ -33,6 +38,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/search', searchRouter);
 app.use('/games', gamesRouter);
+
+
+//admin
+app.use('/admin/games', adminGamesRouter);
+app.use('/admin/players', adminPlayersRouter);
+app.use('/admin/highscores', adminHighscoresRouter);
+
 // app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
