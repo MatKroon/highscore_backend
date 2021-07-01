@@ -37,8 +37,9 @@ router.get("/", async function (req, res) {
     });
 
     games = JSON.parse(JSON.stringify(games));
-
+    let amount = 0;
     games = games.map((game) => {
+      amount++;
       game.Players = game.Players.sort((a, b) => {
         return b.HighScores.points - a.HighScores.points;
       });
@@ -52,9 +53,11 @@ router.get("/", async function (req, res) {
       );
     });
 
-    res.render("index", {
-      title: "High Score",
+    res.render("search", {
+      title: "Sökresultat",
       games,
+      amount,
+      searchTerm,
     });
   } catch (err) {
     console.log(err);

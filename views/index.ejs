@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
+  <%- include('includes/header.ejs'); %>
   <body>
-    <%- include('includes/header.ejs'); %>
+    <%- include('includes/navbar.ejs'); %>
     <div class="container">
+      <h2 class="text-center"><%= title %></h2>
       <div class="gamesList">
         <% games.forEach(game => { console.log(game) %>
 

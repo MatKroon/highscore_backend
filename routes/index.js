@@ -48,7 +48,7 @@ router.get("/", async function (req, res) {
     });
 
     res.render("index", {
-      title: "High Score",
+      title: "Senaste highscores",
       games,
     });
   } catch (err) {

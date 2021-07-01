@@ -1,41 +1,48 @@
 <!DOCTYPE html>
 <html>
-  
+  <%- include('includes/header.ejs'); %>
   <body>
-     <%- include('includes/header.ejs'); %>
-    <div class='gamesList'>
-        <% games.forEach(game => {        
-          %>
+    <%- include('includes/navbar.ejs'); %>
+    <div class="container">
+      <h2 class="text-center"><%= title %></h2>
+      <p>Hittade <%= amount %>st träffar för "<%= searchTerm %>"</p>
+      <div class="gamesList">
+        <% games.forEach(game => { %>
 
-      
-      
-    <div class="card mb-3" style="max-width: 100%;">
-      <a href="games/<%= game.url_slug %>">
-  <div class="row g-0">
-    <div class="col-md-3">
-      <img src="<%= game.imageurl %>" class="img-fluid rounded-start" alt="...">
-    </div>
-    <div class="col-md-6">
-      <div class="card-body">
-        <h5 class="card-title index-card"> <%= game.name %></h5>
-        <!-- <p class="card-text"><%= game.description %></p> -->
-        <p class="card-text"><small class="text-muted"> <%= game.Players[0].firstname %> <%= game.Players[0].surname %> -  <%= game.Players[0].HighScores.date %></small></p>
+        <div class="card mb-3" style="max-width: 100%">
+          <a href="games/<%= game.url_slug %>">
+            <div class="row g-0">
+              <div class="col-md-3">
+                <img
+                  src="<%= game.imageurl %>"
+                  class="img-fluid rounded-start"
+                  alt="..."
+                />
+              </div>
+              <div class="col-md-6">
+                <div class="card-body">
+                  <h5 class="card-title index-card"><%= game.name %></h5>
+                  <!-- <p class="card-text"><%= game.description %></p> -->
+                  <p class="card-text">
+                    <small class="text-muted">
+                      <%= game.Players[0].firstname %> <%=
+                      game.Players[0].surname %> - <%=
+                      game.Players[0].HighScores.date %></small
+                    >
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <h5 class="card-point">
+                  <%= game.Players[0].HighScores.points %>
+                </h5>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <% }) %>
       </div>
     </div>
-     <div class="col-md-3">
- <h5 class="card-point"><%= game.Players[0].HighScores.points %></h5>
-     </div>
-  </div>
-</a>
-</div>
-
-
-
-      <% }) %>
-      </div>
-
-
-    </div>   
-
   </body>
 </html>

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
+  <%- include('../includes/header.ejs'); %>
   <body>
-    <%- include('../includes/header.ejs'); %>
+    <%- include('../includes/navbar.ejs'); %>
     <div class="container">
       <div class="row game_display_row">
         <div class="col-md-6">
@@ -13,7 +14,7 @@
         </div>
       </div>
 
-      <h1 class="text-center">High Scores</h1>
+      <h2 class="text-center">High Scores</h2>
       <div class="playerList">
         <% gameScores.forEach(score => { %>
 
