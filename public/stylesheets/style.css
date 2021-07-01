@@ -4,5 +4,21 @@ body {
 }
 
 a {
-  color: #00B7FF;
+  color: #00b7ff;
+}
+
+.headerMain {
+  margin-bottom: 40px;
+}
+
+.card-point {
+  position: absolute;
+  top: 50%;
+  right: 20%;
+  font-size: 2rem;
+  transform: translateY(-50%);
+}
+
+.card-title {
+  margin-top: 5%;
 }

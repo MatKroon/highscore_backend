@@ -4,8 +4,12 @@ CREATE TABLE games (
   name VARCHAR(50) NOT NULL,
   description VARCHAR(250) NOT NULL,
   genre VARCHAR(50) NOT NULL,
-  imageurl VARCHAR(250) NOT NULL
+  imageurl VARCHAR(250) NOT NULL,
+  url_slug VARCHAR(50) NOT NULL,
+  CONSTRAINT url_unique UNIQUE (url_slug)
 );
+
+-- ALTER TABLE games add column url_slug VARCHAR(50);
 
 CREATE TABLE players (
   id SERIAL PRIMARY KEY,
