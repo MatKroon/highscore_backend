@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../includes/header.ejs') %>
+  <body>
+    <%- include('../includes/navbar.ejs') %>
+
+    <div id="layoutSidenav">
+      <%- include('../includes/sidebar.ejs') %>
+      <div id="layoutSidenav_content">
+        <main>
+          <div class="container-fluid px-4">
+            <a
+              style="height: 45px"
+              class="button float-end"
+              href="/admin/players/new"
+              >Lägg till ny</a
+            >
+            <h1 class="mt-4">Lista över spel</h1>
+
+            <!-- content -->
+
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">Id</th>
+                  <th scope="col">Namn</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% players.forEach(player => { %>
+
+                <tr>
+                  <th scope="row"><%= player.id %></th>
+                  <td><%= player.firstname %> <%= player.surname %></td>
+                </tr>
+
+                <% }); %>
+              </tbody>
+            </table>
+          </div>
+        </main>
+
+        <%- include('../includes/footer.ejs') %>
+      </div>
+    </div>
+  </body>
+</html>

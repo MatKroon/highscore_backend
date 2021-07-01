@@ -1,36 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../includes/header.ejs') %>
+  <body>
+    <%- include('../includes/navbar.ejs') %>
 
+    <div id="layoutSidenav">
+      <%- include('../includes/sidebar.ejs') %>
+      <div id="layoutSidenav_content">
+        <main>
+          <div class="container-fluid px-4">
+            <h1 class="mt-4">Lista över spel</h1>
 
-  <!DOCTYPE html>
-  <html>
-    <%- include('../includes/header.ejs'); %>
-   <body>
-       <div class="wrapper">
-    <%- include('../includes/sidebar.ejs'); %>
-    <div id="content">
-<table class="table table-bordered">
-    <thead>
-      <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Spelnamn</th>
-        <th scope="col">Genre</th>
+            <!-- content -->
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">Id</th>
+                  <th scope="col">Spelnamn</th>
+                  <th scope="col">Genre</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% games.forEach(game => { %>
 
-      </tr>
-    </thead>
-    <tbody>
-        
-        <% games.forEach(game => { %>
-            <tr>
-                <th scope="row"><%= game.id %></th>
-                <td><%= game.name %></td>
-                <td><%= game.genre %></td>
-               
-              </tr>
-            
-       <% }); %> 
-        
-    </tbody>
-  </table>
-</div>
-</div>
+                <tr
+                  style="cursor: pointer"
+                  onclick="window.location='/admin/games/edit/<%= game.url_slug  %>';"
+                >
+                  <th scope="row"><%= game.id %></th>
+                  <td><%= game.name %></td>
+                  <td><%= game.genre %></td>
+                </tr>
+
+                <% }); %>
+              </tbody>
+            </table>
+          </div>
+        </main>
+
+        <%- include('../includes/footer.ejs') %>
+      </div>
+    </div>
   </body>
-  </html>
+</html>

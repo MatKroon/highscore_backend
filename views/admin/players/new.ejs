@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../includes/header.ejs') %>
+  <body>
+    <%- include('../includes/navbar.ejs') %>
+
+    <div id="layoutSidenav">
+      <%- include('../includes/sidebar.ejs') %>
+      <div id="layoutSidenav_content">
+        <main>
+          <div class="container-fluid px-4">
+            <h1 class="mt-4">Nytt spelare</h1>
+
+            <!-- content -->
+            <form method="POST">
+              <div class="mb-3">
+                <label for="firstname" class="form-label">Förnman</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="firstname"
+                  name="firstname"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="surname" class="form-label">Efternman</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="surname"
+                  name="surname"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="email"
+                  name="email"
+                />
+              </div>
+
+              <button type="submit" class="btn btn-primary">Lägg till</button>
+            </form>
+
+            <!-- content end-->
+          </div>
+        </main>
+
+        <%- include('../includes/footer.ejs') %>
+      </div>
+    </div>
+  </body>
+</html>

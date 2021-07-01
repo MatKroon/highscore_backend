@@ -18,7 +18,7 @@ CREATE TABLE players (
   email VARCHAR(250) NOT NULL
 );
 
-CREATE TABLE highscores (
+CREATE TABLE highscores2 (
   id SERIAL PRIMARY KEY,
   game_id INTEGER NOT NULL,
   player_id INTEGER NOT NULL,
@@ -30,10 +30,10 @@ CREATE TABLE highscores (
 );
 
 INSERT INTO games 
-(name, description, genre, imageurl) 
+(name, description, genre, imageurl, url_slug) 
 VALUES 
-('Tetris','Lorum ipsum dolor ','mobilspel', 'https://scienceline.org/wp-content/uploads/2020/01/tetris.jpg'),
-('Mariocart','Lorum ipsum dolor ','tv-spel', 'https://images-na.ssl-images-amazon.com/images/I/71eq0cyHRUS._AC_SL1500_.jpg');
+('Tetris','Lorum ipsum dolor ','mobilspel', 'https://scienceline.org/wp-content/uploads/2020/01/tetris.jpg','tetris'),
+('Mariocart','Lorum ipsum dolor ','tv-spel', 'https://images-na.ssl-images-amazon.com/images/I/71eq0cyHRUS._AC_SL1500_.jpg','mariocart');
 
 
 

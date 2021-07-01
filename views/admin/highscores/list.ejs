@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../includes/header.ejs') %>
+  <body>
+    <%- include('../includes/navbar.ejs') %>
+
+    <div id="layoutSidenav">
+      <%- include('../includes/sidebar.ejs') %>
+      <div id="layoutSidenav_content">
+        <main>
+          <div class="container-fluid px-4">
+            <a
+              style="height: 45px"
+              class="button float-end"
+              href="/admin/players/new"
+              >Lägg till ny</a
+            >
+            <h1 class="mt-4">Lista över highscores</h1>
+
+            <!-- content -->
+
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">Id</th>
+                  <th scope="col">Namn</th>
+                  <th scope="col">Spelare</th>
+                  <th scope="col">Datum</th>
+                  <th scope="col">Poäng</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% gameScores.forEach(score => { %>
+
+                <tr>
+                  <td><%= score.id %></td>
+                  <td><%= score.game %></td>
+                  <td><%= score.firstname %> <%= score.surname %></td>
+                  <td><%= score.date %></td>
+                  <th scope="row"><%= score.points %></th>
+                </tr>
+
+                <% }); %>
+              </tbody>
+            </table>
+          </div>
+        </main>
+
+        <%- include('../includes/footer.ejs') %>
+      </div>
+    </div>
+  </body>
+</html>

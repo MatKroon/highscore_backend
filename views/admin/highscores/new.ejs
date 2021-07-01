@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../includes/header.ejs') %>
+  <body>
+    <%- include('../includes/navbar.ejs') %>
+
+    <div id="layoutSidenav">
+      <%- include('../includes/sidebar.ejs') %>
+      <div id="layoutSidenav_content">
+        <main>
+          <div class="container-fluid px-4">
+            <h1 class="mt-4">Nytt highscore</h1>
+
+            <!-- content -->
+            <form method="POST">
+              <div class="mb-3">
+                <label for="game_id" class="form-label">Poäng</label>
+                <select
+                  name="game_id"
+                  id="game_id"
+                  class="form-select"
+                  aria-label="Default select example"
+                >
+                  <option selected>Välj ett spel</option>
+                  <% games.forEach(game => { %>
+                  <option value="<%= game.id %>"><%= game.name %></option>
+                  <% }); %>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="player_id" class="form-label">Poäng</label>
+                <select
+                  name="player_id"
+                  id="player_id"
+                  class="form-select"
+                  aria-label="Default select example"
+                >
+                  <option selected>Välj spelare</option>
+                  <% players.forEach(player => { %>
+                  <option value="<%= player.id %>">
+                    <%= player.firstname %> <%= player.surname %>
+                  </option>
+                  <% }); %>
+                </select>
+              </div>
+
+              <div class="mb-3">
+                <label for="date" class="form-label">Datum</label>
+                <input type="date" class="form-control" id="date" name="date" />
+              </div>
+
+              <div class="mb-3">
+                <label for="points" class="form-label">Poäng</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="points"
+                  name="points"
+                />
+              </div>
+
+              <button type="submit" class="btn btn-primary">Lägg till</button>
+            </form>
+
+            <!-- content end-->
+          </div>
+        </main>
+
+        <%- include('../includes/footer.ejs') %>
+      </div>
+    </div>
+  </body>
+</html>
