@@ -22,11 +22,11 @@
       <div class="card-body">
         <h5 class="card-title index-card"> <%= game.name %></h5>
         <!-- <p class="card-text"><%= game.description %></p> -->
-        <p class="card-text"><small class="text-muted"> <%= game.Players[0].firstname %> <%= game.Players[0].surname %> -  <%= game.Players[0].HighScores.date %></small></p>
+        <p class="card-text"><small class="text-muted"> <% if(typeof game.Players[0] != 'undefined'){ %>  <%=   game.Players[0].firstname %> <%=  game.Players[0].surname %> - <%= game.Players[0].HighScores.date %> <% } %> </small></p>
       </div>
     </div>
      <div class="col-md-3">
- <h5 class="card-point"><%= game.Players[0].HighScores.points %></h5>
+ <h5 class="card-point"><% if(typeof game.Players[0] != 'undefined'){ %> <%=  game.Players[0].HighScores.points  %> <% } %></h5>
      </div>
   </div>
 </a>

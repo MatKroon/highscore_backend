@@ -16,6 +16,7 @@ var router = express.Router();
 
 
 /* GET games page. */
+try {
   router.get('/:urlSlug', async function (req, res) {
 
   const query = "SELECT games.name AS game, imageurl, description, points, firstname, surname, date " +
@@ -29,7 +30,7 @@ var router = express.Router();
   "LIMIT 10";
 
 
-    try {
+  
       const gameScores = await sequelize.query(query, { replacements: { urlslug: req.params.urlSlug }, type: QueryTypes.SELECT });
      
 //
@@ -50,10 +51,11 @@ var router = express.Router();
       });
        
 
-      } catch(err) {
-       console.log(err);
-      }
     });
+    
+  } catch(err) {
+    console.log(err);
+   }
 
 
 

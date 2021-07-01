@@ -11,7 +11,7 @@ const sequelize = new  Sequelize('postgres://postgres:secretpassword@localhost:5
 Games.init({
     id: {
         type: DataTypes.NUMBER,
-        allowNull: false,
+        autoIncrement: true,
         primaryKey: true
     },
     name: {

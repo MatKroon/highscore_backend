@@ -10,9 +10,10 @@ var searchRouter = require('./routes/search');
 var gamesRouter = require('./routes/games');
 
 //admin
+var adminRouter = require('./routes/admin');
 var adminGamesRouter = require('./routes/admin/games');
-var adminPlayersRouter = require('./routes/admin/players');
-var adminHighscoresRouter = require('./routes/admin/highscores');
+// var adminPlayersRouter = require('./routes/admin/players');
+// var adminHighscoresRouter = require('./routes/admin/highscores');
 // var usersRouter = require('./routes/users');
 
 var app = express();
@@ -41,9 +42,10 @@ app.use('/games', gamesRouter);
 
 
 //admin
+app.use('/admin', adminRouter);
 app.use('/admin/games', adminGamesRouter);
-app.use('/admin/players', adminPlayersRouter);
-app.use('/admin/highscores', adminHighscoresRouter);
+// app.use('/admin/players', adminPlayersRouter);
+// app.use('/admin/highscores', adminHighscoresRouter);
 
 // app.use('/users', usersRouter);
 

@@ -33,11 +33,15 @@ var router = express.Router();
         })
         return game;
       });
+ console.log(games);
  
+      
       games = games.sort( (a,b) => {
+        if(typeof b.Players != 'undefined'){ return 0; }
+        if(typeof a.Players != 'undefined'){ return 1; }
         return new Date(b.Players[0].HighScores.date) - new Date(a.Players[0].HighScores.date);
       });
-
+    
        res.render('index', {
         title: 'High Score',
         games

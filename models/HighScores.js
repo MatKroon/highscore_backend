@@ -12,7 +12,7 @@ const sequelize = new  Sequelize('postgres://postgres:secretpassword@localhost:5
 HighScores.init({
     id: {
         type: DataTypes.NUMBER,
-        allowNull: false,
+        autoIncrement: true,
         primaryKey: true
     },
     game_id: {

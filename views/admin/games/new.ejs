@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <%- include('../includes/header.ejs'); %>
+  
+ <body>
+    <%- include('../includes/sidebar.ejs'); %>
+    <h1>New Game</h1>
+    <form method="POST">
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" class="form-control" id="name" name="name">
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" name="description"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="genre" class="form-label">Genre</label>
+            <textarea class="form-control" id="genre" name="genre"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="imageUrl" class="form-label">Image URL</label>
+            <input type="text" class="form-control" id="imageurl" name="imageurl">
+        </div>
+        <button type="submit" class="btn btn-primary">Add</button>
+      </form>
+</body>
+</html>

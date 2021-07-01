@@ -44,3 +44,36 @@ a:active {
 .text-center {
   text-align: center;
 }
+
+.button {
+  display: block;
+  width: 115px;
+  height: 25px;
+  background: #4e9caf;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  line-height: 25px;
+}
+
+/* ADMIN */
+.headerMainAdmin {
+  margin-bottom: 40px;
+  background-color: #151718;
+  color: antiquewhite !important;
+}
+#sidebar {
+  max-width: 20%;
+  min-width: 200px;
+  background-color: #151718;
+  color: antiquewhite !important;
+}
+
+#content {
+  width: 100%;
+}
+.wrapper {
+  display: flex;
+}
