@@ -4,21 +4,20 @@
   <body>
      
     <div class='gamesList'>
-        <% games.forEach(game => { 
-          
-          
+        <% games.forEach(game => {        
           %>
 
-          <% console.log(game.HighScores) %>
+      
       
     <div class="card mb-3" style="max-width: 100%;">
+      <a href="games/<%= game.url_slug %>">
   <div class="row g-0">
     <div class="col-md-3">
       <img src="<%= game.imageurl %>" class="img-fluid rounded-start" alt="...">
     </div>
     <div class="col-md-6">
       <div class="card-body">
-        <h5 class="card-title"> <%= game.name %></h5>
+        <h5 class="card-title index-card"> <%= game.name %></h5>
         <!-- <p class="card-text"><%= game.description %></p> -->
         <p class="card-text"><small class="text-muted"> <%= game.Players[0].firstname %> <%= game.Players[0].surname %> -  <%= game.Players[0].HighScores.date %></small></p>
       </div>
@@ -27,6 +26,7 @@
  <h5 class="card-point"><%= game.Players[0].HighScores.points %></h5>
      </div>
   </div>
+</a>
 </div>
 
 

@@ -4,7 +4,7 @@ body {
 }
 
 a {
-  color: #00b7ff;
+  color: #151718;
 }
 
 .headerMain {
@@ -19,6 +19,28 @@ a {
   transform: translateY(-50%);
 }
 
-.card-title {
+.index-card {
   margin-top: 5%;
+}
+
+.text-logo:hover,
+.text-logo:focus,
+.text-logo:active {
+  text-decoration: none;
+  color: inherit;
+}
+
+a,
+a:hover,
+a:focus,
+a:active {
+  text-decoration: none;
+}
+
+.view_img {
+  max-width: 100%;
+}
+
+.text-center {
+  text-align: center;
 }

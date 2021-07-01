@@ -26,10 +26,15 @@ Games.init({
         type: DataTypes.STRING,
         allowNull: false
     },
-    imageurl: {
-        type: DataTypes.STRING,
-        allowNull: false
-    }
+   
+   url_slug: {
+    type: DataTypes.STRING,
+    allowNull: false
+},
+imageurl: {
+    type: DataTypes.STRING,
+    allowNull: false
+}
 } ,
     {
         sequelize,

@@ -53,7 +53,7 @@ var router = express.Router();
         title: 'High Score',
         games
       });
-       client.end();
+      
 
       } catch(err) {
        console.log(err);
