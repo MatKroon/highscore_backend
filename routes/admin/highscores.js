@@ -6,7 +6,7 @@ const Players = require("../../models/Players");
 const HighScores = require("../../models/HighScores");
 const { QueryTypes, Sequelize } = require("sequelize");
 const sequelize = new Sequelize(
-  "postgres://postgres:secretpassword@localhost:5432/highscore"
+  `postgres://${process.env.PSQL_USER}:${process.env.PSQL_PASS}@${process.env.PSQL_HOST}:${process.env.PSQL_PORT}/${process.env.PSQL_DB}`
 );
 
 // GET /admin/highscore/new

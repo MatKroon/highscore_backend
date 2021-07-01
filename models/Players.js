@@ -3,7 +3,7 @@ const { Model, Sequelize, DataTypes } = require("sequelize");
 class Players extends Model {}
 
 const sequelize = new Sequelize(
-  "postgres://postgres:secretpassword@localhost:5432/highscore"
+  `postgres://${process.env.PSQL_USER}:${process.env.PSQL_PASS}@${process.env.PSQL_HOST}:${process.env.PSQL_PORT}/${process.env.PSQL_DB}`
 );
 
 Players.init(
