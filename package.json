@@ -12,9 +12,8 @@
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
+    "mongoose": "^5.13.0",
     "morgan": "~1.9.1",
-    "nodemon": "^2.0.7",
-    "pg": "^8.6.0",
-    "sequelize": "^6.6.4"
+    "nodemon": "^2.0.7"
   }
 }
