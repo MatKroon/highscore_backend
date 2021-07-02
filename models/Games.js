@@ -4,8 +4,18 @@ const Games = mongoose.Schema({
   name: String,
   description: String,
   genre: String,
-  imageurl: String,
+  image_url: String,
   url_slug: String,
+  highscores: Array,
+  highestscore: {
+    player: {
+      firstname: String,
+      surname: String,
+      player_id: ObjectId,
+    },
+    points: Number,
+    date: Date,
+  },
 });
 
 module.exports = mongoose.model("games", Games);
