@@ -4,9 +4,10 @@ var router = express.Router();
 const mongoose = require("mongoose");
 const Games = require("../models/Games");
 const mongo = "mongodb://127.0.0.1/highscore";
+//YourUsername:YourPasswordHere@127.0.0.1:27017/your-database-name
 
 /* GET home page. */
-try {
+mongodb: try {
   router.get("/", async function (req, res) {
     mongoose.connect(mongo, {
       useNewUrlParser: true,
