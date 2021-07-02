@@ -1,4 +1,4 @@
-const { Model, Sequelize, DataTypes } = require("sequelize");
+MOONGOSE;
 
 class Games extends Model {}
 
