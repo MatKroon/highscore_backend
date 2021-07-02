@@ -1,4 +1,5 @@
 const { Model, Sequelize, DataTypes } = require("sequelize");
+let vary = 1;
 
 class Games extends Model {}
 
