@@ -1,25 +1,17 @@
 mongo use highscore;
  
-db.highscore.games.insert({
+db.games.insert({
         name: 'Tetris',
         description: 'Ett spel där block placeras tillsammans för att bilda en full rad som då försvinner',
         genre: 'Datorspel',
         image_url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Emacs_Tetris_vector_based_detail.svg/480px-Emacs_Tetris_vector_based_detail.svg.png',
         url_slug: 'tetris',
-        highscores: [], //  [ObjectId(""), ObjectId("")],
-        highestscore: {
-            player:{
-
-            },
-            points: ,
-            date: ''
-        }
     });
 
-db.highscore.players.insert({
-    firstname: '',
-    surname: '',
-    email: '',
+db.players.insert({
+    firstname: 'Kalle',
+    surname: 'Anka',
+    email: 'mail@123.se',
 });
 
 db.highscore.highscores.insert({

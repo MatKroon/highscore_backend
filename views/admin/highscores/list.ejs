@@ -34,8 +34,10 @@
 
                 <tr>
                   <td><%= score.id %></td>
-                  <td><%= score.game %></td>
-                  <td><%= score.firstname %> <%= score.surname %></td>
+                  <td><%= score.game_name %></td>
+                  <td>
+                    <%= score.player.firstname %> <%= score.player.surname %>
+                  </td>
                   <td><%= score.date %></td>
                   <th scope="row"><%= score.points %></th>
                 </tr>

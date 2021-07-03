@@ -4,60 +4,86 @@ const router = express.Router();
 const Games = require("../../models/Games");
 const Players = require("../../models/Players");
 const HighScores = require("../../models/HighScores");
-const { QueryTypes, Sequelize } = require("sequelize");
-const sequelize = new Sequelize(
-  `postgres://${process.env.PSQL_USER}:${process.env.PSQL_PASS}@${process.env.PSQL_HOST}:${process.env.PSQL_PORT}/${process.env.PSQL_DB}`
-);
 
 // GET /admin/highscore/new
-try {
-  router.get("/new", async function (req, res) {
-    const games = await Games.findAll();
-    const players = await Players.findAll();
+router.get("/new", async function (req, res) {
+  const games = await Games.find({}).exec();
+  const players = await Players.find({}).exec();
 
-    res.render("admin/highscores/new", {
-      title: "Administration",
-      games,
-      players,
-    });
+  res.render("admin/highscores/new", {
+    title: "Administration",
+    games,
+    players,
   });
-} catch (err) {
-  console.log(err);
-}
+});
 
 // GET /admin/highscores/list
-try {
-  router.get("/list", async function (req, res) {
-    const query =
-      "SELECT highscores.id AS id, games.name AS game, imageurl, description, points, firstname, surname, date " +
-      "FROM games " +
-      "JOIN highscores " +
-      "  ON games.id = highscores.game_id " +
-      "JOIN players " +
-      "  ON highscores.player_id = players.id";
-
-    const gameScores = await sequelize.query(query, {
-      type: QueryTypes.SELECT,
-    });
-
+router.get("/list", async function (req, res) {
+  HighScores.find({}, (err, gameScores) => {
     res.render("admin/highscores/list", {
       title: "Administration",
       gameScores,
     });
   });
-} catch (err) {
-  console.log(err);
-}
+});
 
 // POST /admin/games/new
 router.post("/new", async function (req, res) {
   const { game_id, player_id, points, date } = req.body;
+  const game = await Games.findOne({ _id: game_id }).exec();
+  const player = await Players.findOne({ _id: player_id }).exec();
 
-  await HighScores.create({
+  const highscore = new HighScores({
     game_id,
     player_id,
+    game_name: game.name,
+    player: {
+      firstname: player.firstname,
+      surname: player.surname,
+    },
     points,
     date,
+  });
+
+  highscore.save((err, results) => {
+    const id = results._id;
+    if (typeof game.higestscore == "undefined") {
+      game.higestscore = { points: 0 };
+    }
+    if (game.higestscore.points < points) {
+      // Update only the hihestscore object
+
+      Games.findOneAndUpdate(
+        { _id: game_id },
+        {
+          $push: { highscores: id },
+          highestscore: {
+            player: {
+              firstname: player.firstname,
+              surname: player.surname,
+            },
+            points,
+            date,
+          },
+        },
+        (err, game) => {
+          if (err) {
+            console.log(err);
+          }
+        }
+      );
+    } else {
+      // Update only the highscores array for games
+      Games.findOneAndUpdate(
+        { _id: game_id },
+        { $push: { highscores: id } },
+        (err, game) => {
+          if (err) {
+            console.log(err);
+          }
+        }
+      );
+    }
   });
 
   res.redirect("/admin/highscores/list");

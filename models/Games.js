@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema,
+  ObjectId = Schema.ObjectId;
 
-const Games = mongoose.Schema({
+const Games = new Schema({
   name: String,
   description: String,
   genre: String,
@@ -19,3 +21,11 @@ const Games = mongoose.Schema({
 });
 
 module.exports = mongoose.model("games", Games);
+
+const mongo = "mongodb://localhost/highscore";
+
+mongoose.connect(mongo, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false,
+});

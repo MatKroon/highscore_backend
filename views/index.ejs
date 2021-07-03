@@ -13,7 +13,7 @@
             <div class="row g-0">
               <div class="col-md-3">
                 <img
-                  src="<%= game.imageurl %>"
+                  src="<%= game.image_url %>"
                   class="img-fluid rounded-start"
                   alt="..."
                 />
@@ -24,18 +24,15 @@
                   <!-- <p class="card-text"><%= game.description %></p> -->
                   <p class="card-text">
                     <small class="text-muted">
-                      <% if(typeof game.Players[0] != 'undefined'){ %> <%=
-                      game.Players[0].firstname %> <%= game.Players[0].surname
-                      %> - <%= game.Players[0].HighScores.date %> <% } %>
+                      <%= game.highestscore.player.firstname %> <%=
+                      game.highestscore.player.surname %> - <%=
+                      game.highestscore.date %>
                     </small>
                   </p>
                 </div>
               </div>
               <div class="col-md-3">
-                <h5 class="card-point">
-                  <% if(typeof game.Players[0] != 'undefined'){ %> <%=
-                  game.Players[0].HighScores.points %> <% } %>
-                </h5>
+                <h5 class="card-point"><%= game.highestscore.points %></h5>
               </div>
             </div>
           </a>

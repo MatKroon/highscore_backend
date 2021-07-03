@@ -11,27 +11,27 @@ router.get("/new", function (req, res) {
 });
 
 // GET /admin/players/list
-try {
-  router.get("/list", async function (req, res) {
-    const players = await Players.findAll();
 
+router.get("/list", function (req, res) {
+  Players.find({}, (err, players) => {
     res.render("admin/players/list", {
       title: "Administration",
       players,
     });
   });
-} catch (err) {
-  console.log(err);
-}
+});
 
 // POST /admin/players/new
 router.post("/new", async function (req, res) {
   const { firstname, surname, email } = req.body;
-
-  await Players.create({
+  const player = new Players({
     firstname,
     surname,
     email,
+  });
+
+  player.save((err, results) => {
+    console.log(results._id);
   });
 
   res.redirect("/admin/players/list");

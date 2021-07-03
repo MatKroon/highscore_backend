@@ -6,8 +6,8 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
 var indexRouter = require("./routes/index");
-var searchRouter = require("./routes/search");
-var gamesRouter = require("./routes/games");
+// var searchRouter = require("./routes/search");
+// var gamesRouter = require("./routes/games");
 
 //admin
 var adminRouter = require("./routes/admin");
@@ -17,14 +17,6 @@ var adminHighscoresRouter = require("./routes/admin/highscores");
 // var usersRouter = require('./routes/users');
 
 var app = express();
-
-// app.locals.client = {
-//   user: "postgres",
-//   host: "localhost",
-//   database: "highscore",
-//   password: "secretpassword",
-//   port: 5432
-// }
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -37,8 +29,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-app.use("/search", searchRouter);
-app.use("/games", gamesRouter);
+// app.use("/search", searchRouter);
+// app.use("/games", gamesRouter);
 
 //admin
 app.use("/admin", adminRouter);

@@ -16,3 +16,8 @@ services:
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: mongo
       ME_CONFIG_MONGODB_ADMINPASSWORD: secretpassword
+
+      # docker run --network some-network -e ME_CONFIG_MONGODB_SERVER=some-mongo -p 8081:8081 mongo-express
+      # the some-monga is the continer name of mongoserver.
+
+      # docker run --name some-mongo -d -p 27017:27017 mongo:latest
