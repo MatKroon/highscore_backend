@@ -43,7 +43,7 @@ router.post("/new", function (req, res) {
 // GET /admin/games/edit
 router.get("/edit/:id", async function (req, res) {
   const urlSlug = req.params.id;
-  const game = Games.findOne({ url_slug: urlSlug }).exec();
+  const game = await Games.findOne({ url_slug: urlSlug }).exec();
   res.render("admin/games/edit", {
     title: "Administration",
     game,
@@ -73,8 +73,11 @@ router.post("/edit/:urlSlug", async function (req, res) {
 // get /admin/games/delete
 router.get("/delete/:id", async function (req, res) {
   const id = req.params.id;
-
-  Games.findOneAndDelete({ _id: id });
+  Games.findOneAndDelete({ _id: id }, (err, results) => {
+    if (err) {
+      console.log(err);
+    }
+  });
 
   res.redirect("/admin/games/list");
 });

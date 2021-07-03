@@ -47,11 +47,11 @@
                   class="form-control"
                   id="imageurl"
                   name="imageurl"
-                  value="<%= game.imageurl %>"
+                  value="<%= game.image_url %>"
                 />
               </div>
               <button type="submit" class="btn btn-primary">Uppdatera</button>
-              <a class="button" href="/admin/games/delete/<%= game.id %>"
+              <a class="button" href="/admin/games/delete/<%= game._id %>"
                 >Ta bort</a
               >
             </form>
