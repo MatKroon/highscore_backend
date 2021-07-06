@@ -5,15 +5,23 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
+const swaggerUi = require("swagger-ui-express");
+const swaggerJSDoc = require("swagger-jsdoc");
+
 var indexRouter = require("./routes/index");
-// var searchRouter = require("./routes/search");
-// var gamesRouter = require("./routes/games");
+var searchRouter = require("./routes/search");
+var gamesRouter = require("./routes/games");
 
 //admin
 var adminRouter = require("./routes/admin");
 var adminGamesRouter = require("./routes/admin/games");
 var adminPlayersRouter = require("./routes/admin/players");
 var adminHighscoresRouter = require("./routes/admin/highscores");
+
+//api
+var apiLoginRouter = require("./routes/api/login");
+var apiGamesRouter = require("./routes/api/games");
+
 // var usersRouter = require('./routes/users');
 
 var app = express();
@@ -29,14 +37,34 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-// app.use("/search", searchRouter);
-// app.use("/games", gamesRouter);
+app.use("/search", searchRouter);
+app.use("/games", gamesRouter);
 
 //admin
 app.use("/admin", adminRouter);
 app.use("/admin/games", adminGamesRouter);
 app.use("/admin/players", adminPlayersRouter);
 app.use("/admin/highscores", adminHighscoresRouter);
+
+//api
+//swagger
+const options = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "High Score",
+      version: "1.0.0",
+    },
+  },
+  apis: ["./routes/api/*.js"],
+};
+
+const openApiSpecification = swaggerJSDoc(options);
+
+//routs
+app.use("/api/login", apiLoginRouter);
+app.use("/api/games", apiGamesRouter);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(openApiSpecification));
 
 // app.use('/users', usersRouter);
 

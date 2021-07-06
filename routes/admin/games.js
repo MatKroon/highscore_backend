@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
+require("../../models/MongooseStart");
 const Games = require("../../models/Games");
 
 // GET /admin/games/new
@@ -29,7 +30,7 @@ router.post("/new", function (req, res) {
     name,
     description,
     genre,
-    imageurl,
+    image_url: imageurl,
     url_slug: urlSlug,
   });
 
@@ -62,8 +63,13 @@ router.post("/edit/:urlSlug", async function (req, res) {
       name,
       description,
       genre,
-      imageurl,
+      image_url: imageurl,
       url_slug,
+    },
+    (err, results) => {
+      if (err) {
+        console.log(err);
+      }
     }
   );
 

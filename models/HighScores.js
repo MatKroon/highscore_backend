@@ -15,11 +15,3 @@ const HighScores = new Schema({
 });
 
 module.exports = mongoose.model("highscores", HighScores);
-
-const mongo = "mongodb://localhost/highscore";
-
-mongoose.connect(mongo, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false,
-});

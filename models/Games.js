@@ -21,11 +21,3 @@ const Games = new Schema({
 });
 
 module.exports = mongoose.model("games", Games);
-
-const mongo = "mongodb://localhost/highscore";
-
-mongoose.connect(mongo, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false,
-});

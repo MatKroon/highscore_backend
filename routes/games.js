@@ -1,55 +1,52 @@
 var express = require("express");
 var router = express.Router();
 
-// const { Client } = require("pg");
-
-//  const Games = require('../models/Games.js');
-//  const HighScores = require('../models/HighScores.js');
-//  const Players = require('../models/Players.js');
-const { QueryTypes, Sequelize } = require("sequelize");
-const sequelize = new Sequelize(
-  `postgres://${process.env.PSQL_USER}:${process.env.PSQL_PASS}@${process.env.PSQL_HOST}:${process.env.PSQL_PORT}/${process.env.PSQL_DB}`
-);
-//  Games.belongsToMany(Players, { through: HighScores });
-//  Players.belongsToMany(Games, { through: HighScores });
-//  Games.hasMany(HighScores);
-//  HighScores.belongsTo(Games,{foreignKey:'game_id'});
+require("../models/MongooseStart");
+const Games = require("../models/Games");
+const HighScores = require("../models/HighScores");
 
 /* GET games page. */
-try {
-  router.get("/:urlSlug", async function (req, res) {
-    const query =
-      "SELECT games.name AS game, imageurl, description, points, firstname, surname, date " +
-      "FROM games " +
-      "JOIN highscores " +
-      "  ON games.id = highscores.game_id " +
-      "JOIN players " +
-      "  ON highscores.player_id = players.id " +
-      "WHERE games.url_slug LIKE :urlslug " +
-      "ORDER BY points DESC " +
-      "LIMIT 10";
+router.get("/:urlSlug", function (req, res) {
+  // const query =
+  //   "SELECT games.name AS game, imageurl, description, points, firstname, surname, date " +
+  //   "FROM games " +
+  //   "JOIN highscores " +
+  //   "  ON games.id = highscores.game_id " +
+  //   "JOIN players " +
+  //   "  ON highscores.player_id = players.id " +
+  //   "WHERE games.url_slug LIKE :urlslug " +
+  //   "ORDER BY points DESC " +
+  //   "LIMIT 10";
 
-    const gameScores = await sequelize.query(query, {
-      replacements: { urlslug: req.params.urlSlug },
-      type: QueryTypes.SELECT,
-    });
+  //       Games.aggregate([{
+  //         $lockup: {
+  //           from: 'highscores',
+  //           as: 'highscores',
+  //           let: { highscores: '_id' },
+  //           pipeline: [{ $match: { $expr: { $eq [ ]} } }]
+  //         }
+  //       }, {
+  //         $project{
+  //         name: 1,
+  //         highscores: 1
+  //       }
+  // }], (err, gameScores) => {
 
-    //
-    // let game = await Games.findOne({ include: Players,
-    //   order: [Games, Players, HighScores, 'points ', DESC],
-    //   where: {
-    //     url_slug : urlSlug
-    //   }});
+  //   });
 
-    // game = JSON.parse(JSON.stringify(game));
+  const urlSlug = req.params.urlSlug;
 
-    res.render("games/view", {
-      title: "High Score",
-      gameScores,
+  Games.findOne({ url_slug: urlSlug }, (err, game) => {
+    const score_ids = game.highscores; //array with ObjeId
+    console.log(game);
+    HighScores.find({ _id: score_ids }, (err, highscores) => {
+      res.render("games/view", {
+        title: "High Score",
+        game,
+        highscores,
+      });
     });
   });
-} catch (err) {
-  console.log(err);
-}
+});
 
 module.exports = router;

@@ -2,7 +2,12 @@ const express = require("express");
 const router = express.Router();
 
 require("../../models/MongooseStart");
-const Players = require("../../models/Players");
+const Players = require("../../../models/Players");
+
+//TODO: GET all
+//TODO: POST
+//TODO: PUT id edit
+//TODO: DELETE
 
 // GET /admin/players/new
 router.get("/new", function (req, res) {

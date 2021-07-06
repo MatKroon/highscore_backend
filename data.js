@@ -21,6 +21,8 @@ db.highscore.highscores.insert({
     date: ''
 });
 
+db.users.insert({username:"mattias", password:"123", email:"mer.andersson@gmail.com"});
+
 // what do i need to do?
 
 // show games with there higest scores

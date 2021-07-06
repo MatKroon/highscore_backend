@@ -1,10 +1,14 @@
 const express = require("express");
 const router = express.Router();
 
-require("../../models/MongooseStart");
+require("../..models/MongooseStart");
 const Games = require("../../models/Games");
 const Players = require("../../models/Players");
 const HighScores = require("../../models/HighScores");
+
+//TODO: GET all
+//TODO: POST
+//TODO: DELETE
 
 // GET /admin/highscore/new
 router.get("/new", async function (req, res) {

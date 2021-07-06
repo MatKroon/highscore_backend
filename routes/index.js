@@ -1,13 +1,9 @@
 var express = require("express");
 var router = express.Router();
 
-const mongoose = require("mongoose");
+require("../models/MongooseStart");
 const Games = require("../models/Games");
-const mongo = "mongodb://localhost/highscore";
-mongoose.connect(mongo, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+
 /* GET home page. */
 
 router.get("/", function (req, res) {

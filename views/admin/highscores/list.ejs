@@ -27,6 +27,7 @@
                   <th scope="col">Spelare</th>
                   <th scope="col">Datum</th>
                   <th scope="col">Poäng</th>
+                  <th scope="col">Tabort</th>
                 </tr>
               </thead>
               <tbody>
@@ -40,6 +41,7 @@
                   </td>
                   <td><%= score.date %></td>
                   <th scope="row"><%= score.points %></th>
+                  <td><a href="delete/<%= score.id %>">Tabort</a></td>
                 </tr>
 
                 <% }); %>
