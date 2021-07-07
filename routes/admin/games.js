@@ -24,21 +24,25 @@ router.get("/list", function (req, res) {
 // POST /admin/games/new
 router.post("/new", function (req, res) {
   const { name, description, genre, imageurl } = req.body;
-  const urlSlug = name.replace("-", "").replace(" ", "-").toLowerCase();
+  if (validateThatNameUnique(name)) {
+    const urlSlug = name.replace("-", "").replace(" ", "-").toLowerCase();
 
-  var game = new Games({
-    name,
-    description,
-    genre,
-    image_url: imageurl,
-    url_slug: urlSlug,
-  });
+    var game = new Games({
+      name,
+      description,
+      genre,
+      image_url: imageurl,
+      url_slug: urlSlug,
+    });
 
-  game.save((err, results) => {
-    console.log(results._id);
-  });
+    game.save((err, results) => {
+      console.log(results._id);
+    });
 
-  res.redirect("/admin/games/list");
+    res.redirect("/admin/games/list");
+  } else {
+    res.redirect("/admin/games/new");
+  }
 });
 
 // GET /admin/games/edit
@@ -87,5 +91,39 @@ router.get("/delete/:id", async function (req, res) {
 
   res.redirect("/admin/games/list");
 });
+
+const validateThatNameUnique = (name) => {
+  Games.findOne({ name }, (err, res) => {
+    if (err) {
+      return true;
+    }
+    return false;
+  });
+};
+
+// const generateUniqeSlug = (name) => {
+//   let urlSlug = name.replace("-", "").replace(" ", "-").toLowerCase();
+//   console.log(urlSlug);
+//   if (checkIfSlugUniqe(urlSlug)) {
+//     return urlSlug;
+//   }
+
+//   for (let n = 0; n < 100; n++) {
+//     urlSlug = urlSlug + "-" + n;
+//     console.log(urlSlug);
+//     if (checkIfSlugUniqe(urlSlug)) {
+//       return urlSlug;
+//     }
+//   }
+// };
+
+// const checkIfSlugUniqe = (slug) => {
+//   Games.findOne({ url_slug: slug }, (err, results) => {
+//     if (err) {
+//       return true;
+//     }
+//     return false;
+//   });
+// };
 
 module.exports = router;

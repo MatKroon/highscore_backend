@@ -1,14 +1,19 @@
-mongo use highscore;
- 
-db.games.insert({
+db.games.insertMany({
         name: 'Tetris',
         description: 'Ett spel där block placeras tillsammans för att bilda en full rad som då försvinner',
         genre: 'Datorspel',
         image_url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Emacs_Tetris_vector_based_detail.svg/480px-Emacs_Tetris_vector_based_detail.svg.png',
         url_slug: 'tetris',
+}, {
+        
+
     });
 
-db.players.insert({
+db.players.insertMany({
+    firstname: 'Kalle',
+    surname: 'Anka',
+    email: 'mail@123.se',
+}, {
     firstname: 'Kalle',
     surname: 'Anka',
     email: 'mail@123.se',

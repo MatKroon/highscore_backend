@@ -11,7 +11,7 @@ router.get("/", function (req, res) {
     //, { sort: { date: -1 } }
 
     games = games.filter((game) => {
-      if (typeof game.highestscore != "undefined") {
+      if (typeof game.highestscore.player.firstname != "undefined") {
         return game;
       }
     });

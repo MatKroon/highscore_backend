@@ -19,8 +19,11 @@ var adminPlayersRouter = require("./routes/admin/players");
 var adminHighscoresRouter = require("./routes/admin/highscores");
 
 //api
-var apiLoginRouter = require("./routes/api/login");
+var apiLoginRouter = require("./routes/api/auth");
 var apiGamesRouter = require("./routes/api/games");
+var apiPlayersRouter = require("./routes/api/players");
+var apiPlayersRouter = require("./routes/api/players");
+var apiScoreRouter = require("./routes/api/highscores");
 
 // var usersRouter = require('./routes/users');
 
@@ -62,8 +65,10 @@ const options = {
 const openApiSpecification = swaggerJSDoc(options);
 
 //routs
-app.use("/api/login", apiLoginRouter);
+app.use("/api/auth", apiLoginRouter);
 app.use("/api/games", apiGamesRouter);
+app.use("/api/players", apiPlayersRouter);
+app.use("/api/scores", apiScoreRouter);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(openApiSpecification));
 
 // app.use('/users', usersRouter);

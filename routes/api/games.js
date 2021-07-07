@@ -4,7 +4,7 @@ const router = express.Router();
 require("../../models/MongooseStart");
 const Games = require("../../models/Games");
 
-//TODO: GET id ??
+//TODO: GET id ?? SKIP
 //TODO: GET serach title
 //TODO: POST
 //TODO: PUT id
@@ -65,7 +65,7 @@ const Games = require("../../models/Games");
 // GET /api/games/
 router.get("/", function (req, res) {
   Games.find({}, (err, games) => {
-    const gamesDTO = games.map(mapGamesToDTO);
+    const gamesDTO = games.map(mapGameToDTO);
     res.json(gamesDTO);
   });
 });
@@ -74,58 +74,87 @@ router.get("/", function (req, res) {
 router.get("/:searchTerm", function (req, res) {
   const searchTerm = req.params.searchTerm;
   Games.find({ name: { $regex: searchTerm, $options: "i" } }, (err, games) => {
-    console.log(games);
     if (!games) {
       return res.sendStatus(404);
     }
-    const gamesDTO = games.map(mapGamesToDTO);
+
+    const gamesDTO = games.map(mapGameToDTO);
     res.json(gamesDTO);
   });
 });
 
-// GET /admin/games/list
-router.get("/list", function (req, res) {
-  Games.find({}, (err, games) => {
-    res.render("admin/games/list", {
-      title: "Administration",
-      games,
-    });
-  });
-});
-
-// POST /admin/games/new
+// POST /admin/games/
 router.post("/", function (req, res) {
   const { name, description, genre, imageurl } = req.body;
-  const urlSlug = name.replace("-", "").replace(" ", "-").toLowerCase();
 
-  var game = new Games({
-    name,
-    description,
-    genre,
-    image_url: imageurl,
-    url_slug: urlSlug,
-  });
+  if (validateThatNameUnique()) {
+    const urlSlug = name.replace("-", "").replace(" ", "-").toLowerCase();
 
-  game.save((err, results) => {
-    console.log(results._id);
-  });
+    var game = new Games({
+      name,
+      description,
+      genre,
+      image_url: imageurl,
+      url_slug: urlSlug,
+    });
 
-  res.redirect("/admin/games/list");
-});
+    if (!name) {
+      return res
+        .status(400) // 400 Bad Request
+        .send("Invalid name");
+    }
 
-// GET /admin/games/edit
-router.get("/edit/:id", async function (req, res) {
-  const urlSlug = req.params.id;
-  const game = await Games.findOne({ url_slug: urlSlug }).exec();
-  res.render("admin/games/edit", {
-    title: "Administration",
-    game,
-  });
+    if (!genre) {
+      return res
+        .status(400) // 400 Bad Request
+        .send("Invalid genre");
+    }
+
+    if (!imageurl) {
+      return res
+        .status(400) // 400 Bad Request
+        .send("Invalid image url");
+    }
+
+    game.save((err, game) => {
+      if (err) {
+        res.sendStatus(400);
+      }
+      res.location(`/api/games/${game.url_slug}`);
+      game = [game];
+
+      const gameDTO = game.map(mapGameToDTO);
+
+      res.status(201).send(gameDTO);
+    });
+  } else {
+    res
+      .status(400) // 400 Bad Request
+      .send("Game already exist");
+  }
 });
 
 // POST /admin/games/edit
-router.post("/edit/:urlSlug", async function (req, res) {
-  const { id, name, description, genre, imageurl } = req.body;
+//TODO: Here there is a need to fix so that it's double checked that the user that is added is in fact an actual user in the system or remve the posibility to edit the highestscore...
+router.put("/:urlSlug", async function (req, res) {
+  const urlSlug = req.params.urlSlug;
+
+  const { id, name, description, genre, imageurl, highscores, highestscore } =
+    req.body;
+
+  const game = await Games.findOne({ url_slug: urlSlug }).exec();
+
+  if (!game) {
+    return res
+      .status(400) // 400 Bad Request
+      .send("No game with such urlslug");
+  }
+
+  if (game.id != id) {
+    return res
+      .status(400) // 400 Bad Request
+      .send("urlslug and id does not mactch");
+  }
 
   const url_slug = name.replace("-", "").replace(" ", "-").toLowerCase();
 
@@ -137,30 +166,45 @@ router.post("/edit/:urlSlug", async function (req, res) {
       genre,
       image_url: imageurl,
       url_slug,
+      highscores,
+      highestscore,
     },
     (err, results) => {
       if (err) {
-        console.log(err);
+        res.sendStatus(404);
+        return;
       }
+      res.sendStatus(204);
     }
   );
-
-  res.redirect("/admin/games/list");
 });
 
-// get /admin/games/delete
-router.get("/delete/:id", async function (req, res) {
-  const id = req.params.id;
-  Games.findOneAndDelete({ _id: id }, (err, results) => {
+// get /api/games/{urlslug}    delete
+router.delete("/:urlSlug", async function (req, res) {
+  const urlSlug = req.params.urlSlug;
+  Games.findOneAndDelete({ url_slug: urlSlug }, (err, results) => {
     if (err) {
-      console.log(err);
+      return res
+        .status(204) // 400 Bad Request
+        .send("Game with that urlslug did not exist");
     }
+    res.sendStatus(204);
   });
-
-  res.redirect("/admin/games/list");
 });
 
-const mapGamesToDTO = (game) => {
+const mapGameToDTO = (game) => {
+  if (typeof game.highestscore.player.firstname == "undefined") {
+    return {
+      highscores: game.highscores || [],
+      _id: game._id,
+      name: game.name,
+      description: game.description,
+      genre: game.genre,
+      url_slug: game.url_slug,
+      image_url: game.image_url,
+    };
+  }
+
   return {
     highestscore: {
       player: {
@@ -179,5 +223,39 @@ const mapGamesToDTO = (game) => {
     image_url: game.image_url,
   };
 };
+
+const validateThatNameUnique = (name) => {
+  Games.findOne({ name }, (err, res) => {
+    if (err) {
+      return true;
+    }
+    return false;
+  });
+};
+
+// const generateUniqeSlug = (name) => {
+//   let urlSlug = name.replace("-", "").replace(" ", "-").toLowerCase();
+//   console.log(urlSlug);
+//   if (checkIfSlugUniqe(urlSlug)) {
+//     return urlSlug;
+//   }
+
+//   for (let n = 0; n < 100; n++) {
+//     urlSlug = urlSlug + "-" + n;
+//     console.log(urlSlug);
+//     if (checkIfSlugUniqe(urlSlug)) {
+//       return urlSlug;
+//     }
+//   }
+// };
+
+// const checkIfSlugUniqe = (slug) => {
+//   Games.findOne({ url_slug: slug }, (err, results) => {
+//     if (err) {
+//       return true;
+//     }
+//     return false;
+//   });
+// };
 
 module.exports = router;

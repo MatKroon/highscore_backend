@@ -45,13 +45,16 @@ router.post("/new", async function (req, res) {
     points,
     date,
   });
-
+  console.log(game);
   highscore.save((err, results) => {
     const id = results._id;
     if (typeof game.higestscore == "undefined") {
       game.higestscore = { points: 0 };
     }
-    if (game.higestscore.points < points) {
+    console.log(game);
+    console.log(game.highestscore.points);
+    console.log(points);
+    if (game.highestscore.points < points) {
       // Update only the hihestscore object
 
       Games.findOneAndUpdate(
