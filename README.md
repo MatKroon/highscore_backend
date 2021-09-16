@@ -4,6 +4,6 @@
 
 #### Built with Express - Node.js
 
-* _1. edit setting in .env file, eg. port to use and sql user etc._
-* _2. open a terminal in the folder and run "docker compose up", given that docker is installed_
-* _3. Open the aplication on the asigned port and add contents_
+_1. edit setting in .env file, eg. port to use and sql user etc._
+_2. open a terminal in the folder and run "docker compose up", given that docker is installed_
+_3. Open the aplication on the asigned port and add contents_
