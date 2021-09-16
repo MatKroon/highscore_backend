@@ -1,9 +1,9 @@
-# _{Highscore}_
+# _Highscore_
 
-#### _{A application to keep track of highscores in for different games}_
+#### _A application to keep track of highscores in for different games_
 
-## Express - Node.js
+#### Built with Express - Node.js
 
-* _edit setting in .env file, eg. port to use and sql user etc._
-* _open a terminal in the folder and run "docker compose up", given that docker is installed_
-* _Open the aplication on the asigned port and add contents_
+* _1. edit setting in .env file, eg. port to use and sql user etc._
+* _2. open a terminal in the folder and run "docker compose up", given that docker is installed_
+* _3. Open the aplication on the asigned port and add contents_
